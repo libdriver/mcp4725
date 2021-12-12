@@ -4,7 +4,7 @@
 
 ## LibDriver MCP4725
 
-[English](/README.md) | [ 简体中文](/README_CH.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
 
 MCP4725是一款低功耗、高精度、单通道，12位的DAC。DAC输入和配置数据可以通过IIC接口编程到非易失性存储器（EEPROM）。非易失性存储器使DAC设备掉电时能够保持DAC数值，DAC通电后立即输出存储数值。当DAC设备用作网络中其他设备的支持设备。该芯片包括一个上电复位（POR）电路，用于确保可靠的通电和车载充电EEPROM编程电压泵。芯片以VDD作为DAC输出参考电压。断电模式下，输出放大器可配置为低、中或高电阻输出负载。MCP4725具有外部A0地址选择位。A0引脚可连接到用户设备的VDD或VSS应用程序板。MCP4725具有两线IIC兼容串行标准（100 kHz）、快速（400 kHz）或高速接口速度（3.4 MHz）模式，MCP4725是一个理想的DAC器件。MCP4725被用于传感器校准、闭环伺服控制、低功耗便携仪器、PC外围设备和数据采集系统。
 
@@ -88,7 +88,7 @@ return 0;
 
 ### 版权
 
-版权(C) LibDriver 2015-2021 版权所有
+版权 (c) 2015 - 现在 LibDriver 版权所有
 
 MIT 许可证（MIT）
 

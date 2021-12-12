@@ -1,0 +1,103 @@
+<div align=center>
+<img src="/doc/image/logo.png"/>
+</div>
+
+## LibDriver MCP4725
+
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+
+MCP4725是一款低功耗、高精度、單通道，12位的DAC。 DAC輸入和配置數據可以通過IIC接口編程到非易失性存儲器（EEPROM）。非易失性存儲器使DAC設備掉電時能夠保持DAC數值，DAC通電後立即輸出存儲數值。當DAC設備用作網絡中其他設備的支持設備。該芯片包括一個上電複位（POR）電路，用於確保可靠的通電和車載充電EEPROM編程電壓泵。芯片以VDD作為DAC輸出參考電壓。斷電模式下，輸出放大器可配置為低、中或高電阻輸出負載。 MCP4725具有外部A0地址選擇位。 A0引腳可連接到用戶設備的VDD或VSS應用程序板。 MCP4725具有兩線IIC兼容串行標準（100 kHz）、快速（400 kHz）或高速接口速度（3.4 MHz）模式，MCP4725是一個理想的DAC器件。 MCP4725被用於傳感器校準、閉環伺服控制、低功耗便攜儀器、PC外圍設備和數據採集系統。
+
+LibDriver MCP4725是LibDriver推出的MCP4725全功能驅動，該驅動提供DAC輸出和DAC輸出值讀取等功能。
+
+### 目錄
+
+  - [說明](#說明)
+  - [安裝](#安裝)
+  - [使用](#使用)
+    - [example basic](#example-basic)
+  - [文檔](#文檔)
+  - [貢獻](#貢獻)
+  - [版權](#版權)
+  - [聯繫我們](#聯繫我們)
+
+### 說明
+
+/src目錄包含了LibDriver MCP4725的源文件。
+
+/interface目錄包含了LibDriver MCP4725與平台無關的IIC模板。
+
+/test目錄包含了LibDriver MCP4725驅動測試程序，該程序可以簡單的測試芯片必要功能。
+
+/example目錄包含了LibDriver MCP4725編程範例。
+
+/doc目錄包含了LibDriver MCP4725離線文檔。
+
+/datasheet目錄包含了MCP4725數據手冊。
+
+/project目錄包含了常用Linux與單片機開發板的工程樣例。所有工程均採用shell腳本作為調試方法，詳細內容可參考每個工程裡面的README.md。
+
+### 安裝
+
+參考/interface目錄下與平台無關的IIC模板，完成指定平台的IIC驅動。
+
+將/src目錄，/interface目錄和/example目錄加入工程。
+
+### 使用
+
+#### example basic
+
+```C
+uint8_t res;
+
+res = mcp4725_basic_init(MCP4725_ADDR_A0_GND);
+if (res)
+{
+    return 1;
+}
+
+...
+
+res = mcp4725_basic_write(1.2f);
+if (res)
+{
+    mcp4725_interface_debug_print("mcp4725: write failed.\n");
+    mcp4725_basic_deinit();
+
+    ...
+    
+    return 1;
+}
+
+...
+
+mcp4725_basic_deinit();
+
+return 0;
+```
+
+### 文檔
+
+在線文檔: https://www.libdriver.com/docs/mcp4725/index.html
+
+離線文檔: /doc/html/index.html
+
+### 貢獻
+
+請聯繫lishifenging@outlook.com
+
+### 版權
+
+版權 (c) 2015 - 現在 LibDriver 版權所有
+
+MIT 許可證（MIT）
+
+特此免費授予任何獲得本軟件副本和相關文檔文件（下稱“軟件”）的人不受限制地處置該軟件的權利，包括不受限制地使用、複製、修改、合併、發布、分發、轉授許可和/或出售該軟件副本，以及再授權被配發了本軟件的人如上的權利，須在下列條件下：
+
+上述版權聲明和本許可聲明應包含在該軟件的所有副本或實質成分中。
+
+本軟件是“如此”提供的，沒有任何形式的明示或暗示的保證，包括但不限於對適銷性、特定用途的適用性和不侵權的保證。在任何情況下，作者或版權持有人都不對任何索賠、損害或其他責任負責，無論這些追責來自合同、侵權或其它行為中，還是產生於、源於或有關於本軟件以及本軟件的使用或其它處置。
+
+### 聯繫我們
+
+請聯繫lishifenging@outlook.com
