@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,11 +6,11 @@
 
 ## LibDriver MCP4725
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/mcp4725/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/mcp4725/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 MCP4725是一款低功耗、高精度、單通道，12位的DAC。 DAC輸入和配置數據可以通過IIC接口編程到非易失性存儲器（EEPROM）。非易失性存儲器使DAC設備掉電時能夠保持DAC數值，DAC通電後立即輸出存儲數值。當DAC設備用作網絡中其他設備的支持設備。該芯片包括一個上電複位（POR）電路，用於確保可靠的通電和車載充電EEPROM編程電壓泵。芯片以VDD作為DAC輸出參考電壓。斷電模式下，輸出放大器可配置為低、中或高電阻輸出負載。 MCP4725具有外部A0地址選擇位。 A0引腳可連接到用戶設備的VDD或VSS應用程序板。 MCP4725具有兩線IIC兼容串行標準（100 kHz）、快速（400 kHz）或高速接口速度（3.4 MHz）模式，MCP4725是一個理想的DAC器件。 MCP4725被用於傳感器校準、閉環伺服控制、低功耗便攜儀器、PC外圍設備和數據採集系統。
 
-LibDriver MCP4725是LibDriver推出的MCP4725全功能驅動，該驅動提供DAC輸出和DAC輸出值讀取等功能。
+LibDriver MCP4725是LibDriver推出的MCP4725全功能驅動，該驅動提供DAC輸出和DAC輸出值讀取等功能並且它符合MISRA標準。
 
 ### 目錄
 

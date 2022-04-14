@@ -35,8 +35,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_MCP4725_BASIC_H_
-#define _DRIVER_MCP4725_BASIC_H_
+#ifndef DRIVER_MCP4725_BASIC_H
+#define DRIVER_MCP4725_BASIC_H
 
 #include "driver_mcp4725_interface.h"
 

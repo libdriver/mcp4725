@@ -104,10 +104,9 @@ void mcp4725_interface_delay_ms(uint32_t ms)
 /**
  * @brief     interface print format data
  * @param[in] fmt is the format data
- * @return    length of the send data
  * @note      none
  */
-uint16_t mcp4725_interface_debug_print(char *fmt, ...)
+void mcp4725_interface_debug_print(const char *const fmt, ...)
 {
-    return 0;
+    
 }

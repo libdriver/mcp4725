@@ -130,7 +130,7 @@ uint8_t mcp4725(uint8_t argc, char **argv)
                     return 5;
                 }
                 /* run reg test */
-                if (mcp4725_register_test(addr))
+                if (mcp4725_register_test(addr) != 0)
                 {
                     return 1;
                 }
@@ -178,7 +178,7 @@ uint8_t mcp4725(uint8_t argc, char **argv)
                     return 5;
                 }
                 /* run write test */
-                if (mcp4725_write_test(addr, atoi(argv[3])))
+                if (mcp4725_write_test(addr, atoi(argv[3])) != 0)
                 {
                     return 1;
                 }
@@ -199,7 +199,7 @@ uint8_t mcp4725(uint8_t argc, char **argv)
             /* write function */
             if (strcmp("write", argv[2]) == 0)
             {
-                volatile uint8_t res;
+                uint8_t res;
                 mcp4725_address_t addr;
                 
                 if (strcmp("-a", argv[4]) != 0)
@@ -220,20 +220,20 @@ uint8_t mcp4725(uint8_t argc, char **argv)
                 }
                 
                 res = mcp4725_basic_init(addr);
-                if (res)
+                if (res != 0)
                 {
                     return 1;
                 }
                 mcp4725_interface_debug_print("mcp4725: write %0.3f.\n", (float)(atof(argv[3])));
                 res = mcp4725_basic_write((float)(atof(argv[3])));
-                if (res)
+                if (res != 0)
                 {
                     mcp4725_interface_debug_print("mcp4725: write failed.\n");
-                    mcp4725_basic_deinit();
+                    (void)mcp4725_basic_deinit();
                     
                     return 1;
                 }
-                mcp4725_basic_deinit();
+                (void)mcp4725_basic_deinit();
                 
                 return 0;
             }

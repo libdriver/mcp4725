@@ -35,8 +35,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_MCP4725_INTERFACE_H_
-#define _DRIVER_MCP4725_INTERFACE_H_
+#ifndef DRIVER_MCP4725_INTERFACE_H
+#define DRIVER_MCP4725_INTERFACE_H
 
 #include "driver_mcp4725.h"
 
@@ -103,10 +103,9 @@ void mcp4725_interface_delay_ms(uint32_t ms);
 /**
  * @brief     interface print format data
  * @param[in] fmt is the format data
- * @return    length of the send data
  * @note      none
  */
-uint16_t mcp4725_interface_debug_print(char *fmt, ...);
+void mcp4725_interface_debug_print(const char *const fmt, ...);
 
 /**
  * @}

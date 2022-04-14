@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,13 +6,13 @@
 
 ## LibDriver MCP4725
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/mcp4725/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/mcp4725/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 The MCP4725 is a low-power, high accuracy, single channel, 12-bit buffered voltage output Digital-to-Analog Convertor (DAC) with non-volatile memory (EEPROM). Its on-board precision output amplifier allows it to achieve rail-to-rail analog output swing.
 The DAC input and configuration data can be programmed to the non-volatile memory (EEPROM) by the user using I2C interface command. The non-volatile memory feature enables the DAC device to hold the DAC input code during power-off time, and the DAC output is available immediately after power-up. This feature is very useful when the DAC device is used as a supporting device for other devices in the network. The device includes a Power-On-Reset (POR) circuit to ensure reliable power-up and an on-board charge pump for the EEPROM programming voltage. The DAC reference is driven from VDD directly. In powerdown
 mode, the output amplifier can be configured to present a known low, medium, or high resistance output load.The MCP4725 has an external A0 address bit selection pin. This A0 pin can be tied to VDD or VSS of the user’s application board.The MCP4725 has a two-wire I2C. compatible serial interface for standard (100 kHz), fast (400 kHz), or high speed (3.4 MHz) mode. The MCP4725 is an ideal DAC device where design simplicity and small footprint is desired, and for applications requiring the DAC device settings to be saved during power-off time. The device is available in a small 6-pin SOT-23 package. MCP4725 is used in sensor calibration, closed-loop servo control, low-power portable instruments, PC peripherals and data acquisition system.
 
-LibDriver MCP4725 is a full function MCP4725 driver launched by LibDriver.It provides DAC output and DAC output value reading function.
+LibDriver MCP4725 is a full function MCP4725 driver launched by LibDriver.It provides DAC output and DAC output value reading function. LibDriver is MISRA compliant.
 
 ### Table of Contents
 

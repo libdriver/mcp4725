@@ -49,7 +49,7 @@ static mcp4725_handle_t gs_handle;        /**< mcp4725 handle */
  */
 uint8_t mcp4725_basic_init(mcp4725_address_t addr_pin)
 {
-    volatile uint8_t res;
+    uint8_t res;
     
     /* link interface function */
     DRIVER_MCP4725_LINK_INIT(&gs_handle, mcp4725_handle_t);
@@ -62,7 +62,7 @@ uint8_t mcp4725_basic_init(mcp4725_address_t addr_pin)
     
     /* set iic addr pin */
     res = mcp4725_set_addr_pin(&gs_handle, addr_pin);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set addr pin failed.\n");
         
@@ -71,7 +71,7 @@ uint8_t mcp4725_basic_init(mcp4725_address_t addr_pin)
     
     /* mcp4725 init */
     res = mcp4725_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: init failed.\n");
         
@@ -80,30 +80,30 @@ uint8_t mcp4725_basic_init(mcp4725_address_t addr_pin)
     
     /* set power mode */
     res = mcp4725_set_power_mode(&gs_handle, MCP4725_BASIC_DEFAULT_POWER_DOWN_MODE);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set mode */
     res = mcp4725_set_mode(&gs_handle, MCP4725_BASIC_DEFAULT_MODE);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set reference voltage */
     res = mcp4725_set_reference_voltage(&gs_handle, MCP4725_BASIC_DEFAULT_REFERENCE_VOLTAGE);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set reference voltage failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
@@ -121,12 +121,12 @@ uint8_t mcp4725_basic_init(mcp4725_address_t addr_pin)
  */
 uint8_t mcp4725_basic_write(float voltage_v)
 {
-    volatile uint16_t value;
-    volatile uint8_t res; 
+    uint16_t value;
+    uint8_t res; 
     
     /* convert voltage to register */
     res = mcp4725_convert_to_register(&gs_handle, voltage_v, (uint16_t *)&value);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: convert to register failed.\n");
         
@@ -134,7 +134,7 @@ uint8_t mcp4725_basic_write(float voltage_v)
     }
     
     /* write voltage */
-    if (mcp4725_write(&gs_handle, (uint16_t)value))
+    if (mcp4725_write(&gs_handle, (uint16_t)value) != 0)
     {
         return 1;
     }
@@ -154,7 +154,7 @@ uint8_t mcp4725_basic_write(float voltage_v)
 uint8_t mcp4725_basic_deinit(void)
 {
     /* close mcp4725 */
-    if (mcp4725_deinit(&gs_handle))
+    if (mcp4725_deinit(&gs_handle) != 0)
     {
         return 1;
     }

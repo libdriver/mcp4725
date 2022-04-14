@@ -51,10 +51,10 @@ static mcp4725_handle_t gs_handle;        /**< mcp4725 handle */
  */
 uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
 {
-    volatile uint8_t res;
-    volatile uint32_t i;
-    volatile float input;
-    volatile uint16_t reg, value;
+    uint8_t res;
+    uint32_t i;
+    float input;
+    uint16_t reg, value;
     mcp4725_info_t info;
     
     /* link interface function */
@@ -68,7 +68,7 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
 
     /* get mcp4725 inforation */
     res = mcp4725_info(&info);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get info failed.\n");
        
@@ -93,7 +93,7 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
     
     /* set iic addr */
     res = mcp4725_set_addr_pin(&gs_handle, addr);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set addr pin failed.\n");
        
@@ -102,7 +102,7 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
     
     /* mcp4725 init */
     res = mcp4725_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: init failed.\n");
        
@@ -111,30 +111,30 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
     
     /* set power down normal mode */
     res = mcp4725_set_power_mode(&gs_handle, MCP4725_POWER_DOWN_MODE_NORMAL);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set reference voltage 3.3V */
     res = mcp4725_set_reference_voltage(&gs_handle, 3.3f);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set reference voltage failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set dac mode */
     res = mcp4725_set_mode(&gs_handle, MCP4725_MODE_DAC);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
@@ -145,29 +145,29 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
     
         /* convert to register */
         res = mcp4725_convert_to_register(&gs_handle, input, (uint16_t *)&reg);
-        if (res)
+        if (res != 0)
         {
             mcp4725_interface_debug_print("mcp4725: convert to register failed.\n");
-            mcp4725_deinit(&gs_handle);
+            (void)mcp4725_deinit(&gs_handle);
             
             return 1;
         }
 
         /* write dac */
         res = mcp4725_write(&gs_handle, (uint16_t)reg);
-        if (res)
+        if (res != 0)
         {
             mcp4725_interface_debug_print("mcp4725: write data failed.\n");
-            mcp4725_deinit(&gs_handle);
+            (void)mcp4725_deinit(&gs_handle);
             
             return 1;
         }
         mcp4725_interface_delay_ms(1000);
         res = mcp4725_read(&gs_handle, (uint16_t *)&value);
-        if (res)
+        if (res != 0)
         {
             mcp4725_interface_debug_print("mcp4725: read data failed.\n");
-            mcp4725_deinit(&gs_handle);
+            (void)mcp4725_deinit(&gs_handle);
             
             return 1;
         }
@@ -178,10 +178,10 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
     /* set mode eeprom mode */
     mcp4725_interface_debug_print("mcp4725: set eeprom mode.\n"); 
     res = mcp4725_set_mode(&gs_handle, MCP4725_MODE_EEPROM);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
@@ -191,29 +191,29 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
 
         /* convert to register */
         res = mcp4725_convert_to_register(&gs_handle, input, (uint16_t *)&reg);
-        if (res)
+        if (res != 0)
         {
             mcp4725_interface_debug_print("mcp4725: convert to register failed.\n");
-            mcp4725_deinit(&gs_handle);
+            (void)mcp4725_deinit(&gs_handle);
             
             return 1;
         }
 
         /* write dac */
         res = mcp4725_write(&gs_handle, (uint16_t)reg);
-        if (res)
+        if (res != 0)
         {
             mcp4725_interface_debug_print("mcp4725: write data failed.\n");
-            mcp4725_deinit(&gs_handle);
+            (void)mcp4725_deinit(&gs_handle);
             
             return 1;
         }
         mcp4725_interface_delay_ms(1000);
         res = mcp4725_read(&gs_handle, (uint16_t *)&value);
-        if (res)
+        if (res != 0)
         {
             mcp4725_interface_debug_print("mcp4725: read data failed.\n");
-            mcp4725_deinit(&gs_handle);
+            (void)mcp4725_deinit(&gs_handle);
             
             return 1;
         }
@@ -223,7 +223,7 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
 
     /* finish write test */
     mcp4725_interface_debug_print("mcp4725: finish write test.\n");
-    mcp4725_deinit(&gs_handle);
+    (void)mcp4725_deinit(&gs_handle);
     
     return 0;
 }

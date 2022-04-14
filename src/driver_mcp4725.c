@@ -36,6 +36,7 @@
  */
 
 #include "driver_mcp4725.h"
+#include <math.h>
 
 /**
  * @brief chip information definition
@@ -100,7 +101,7 @@ uint8_t mcp4725_init(mcp4725_handle_t *handle)
         return 3;                                                        /* return error */
     }
     
-    if (handle->iic_init())                                              /* iic init */
+    if (handle->iic_init() != 0)                                         /* iic init */
     {
         handle->debug_print("mcp4725: iic init failed.\n");              /* iic init failed */
         
@@ -132,7 +133,7 @@ uint8_t mcp4725_deinit(mcp4725_handle_t *handle)
         return 3;                                                    /* return error */
     }
     
-    if (handle->iic_deinit())                                        /* iic deinit */
+    if (handle->iic_deinit() != 0)                                   /* iic deinit */
     {
         handle->debug_print("mcp4725: iic deinit failed.\n");        /* iic deinit failed */
         
@@ -154,14 +155,14 @@ uint8_t mcp4725_deinit(mcp4725_handle_t *handle)
  */
 uint8_t mcp4725_set_addr_pin(mcp4725_handle_t *handle, mcp4725_address_t addr_pin)
 {
-    if (handle == NULL)                                 /* check handle */
+    if (handle == NULL)                                          /* check handle */
     {
-        return 2;                                       /* return error */
+        return 2;                                                /* return error */
     }
     
-    handle->iic_addr = ((0x60 | addr_pin) << 1);        /* set iic address */
+    handle->iic_addr = (uint8_t)((0x60 | addr_pin) << 1);        /* set iic address */
     
-    return 0;                                           /* success return 0 */
+    return 0;                                                    /* success return 0 */
 }
 
 /**
@@ -180,7 +181,7 @@ uint8_t mcp4725_get_addr_pin(mcp4725_handle_t *handle, mcp4725_address_t *addr_p
         return 2;                                     /* return error */
     }
     
-    if (((handle->iic_addr >> 1) & ~0x60))
+    if (((handle->iic_addr >> 1) & ~0x60) != 0)
     {
         *addr_pin = (mcp4725_address_t)(0x01);        /* get iic address */
     }
@@ -204,18 +205,18 @@ uint8_t mcp4725_get_addr_pin(mcp4725_handle_t *handle, mcp4725_address_t *addr_p
  */
 uint8_t mcp4725_set_mode(mcp4725_handle_t *handle, mcp4725_mode_t mode)
 {
-    if (handle == NULL)             /* check handle */
+    if (handle == NULL)                  /* check handle */
     {
-        return 2;                   /* return error */
+        return 2;                        /* return error */
     }
-    if (handle->inited != 1)        /* check handle initialization */
+    if (handle->inited != 1)             /* check handle initialization */
     {
-        return 3;                   /* return error */
+        return 3;                        /* return error */
     }
     
-    handle->mode = mode;            /* set mode */
+    handle->mode = (uint8_t)mode;        /* set mode */
 
-    return 0;                       /* success return 0 */
+    return 0;                            /* success return 0 */
 }
 
 /**
@@ -256,18 +257,18 @@ uint8_t mcp4725_get_mode(mcp4725_handle_t *handle, mcp4725_mode_t *mode)
  */
 uint8_t mcp4725_set_power_mode(mcp4725_handle_t *handle, mcp4725_power_down_mode_t mode)
 {
-    if (handle == NULL)               /* check handle */
+    if (handle == NULL)                        /* check handle */
     {
-        return 2;                     /* return error */
+        return 2;                              /* return error */
     }
-    if (handle->inited != 1)          /* check handle initialization */
+    if (handle->inited != 1)                   /* check handle initialization */
     {
-        return 3;                     /* return error */
+        return 3;                              /* return error */
     }
     
-    handle->power_mode = mode;        /* set power mode */
+    handle->power_mode = (uint8_t)mode;        /* set power mode */
     
-    return 0;                         /* success return 0 */
+    return 0;                                  /* success return 0 */
 }
 
 /**
@@ -361,7 +362,7 @@ uint8_t mcp4725_get_reference_voltage(mcp4725_handle_t *handle, float *ref_volta
  */
 uint8_t mcp4725_read(mcp4725_handle_t *handle, uint16_t *value)
 {
-    volatile uint8_t buf[5];
+    uint8_t buf[5];
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -372,7 +373,7 @@ uint8_t mcp4725_read(mcp4725_handle_t *handle, uint16_t *value)
         return 3;                                                         /* return error */
     }
     
-    if (handle->iic_read_cmd(handle->iic_addr, (uint8_t *)buf, 5))        /* read data */
+    if (handle->iic_read_cmd(handle->iic_addr, (uint8_t *)buf, 5) != 0)   /* read data */
     {
         handle->debug_print("mcp4725: read failed.\n");                   /* read data failed */
         
@@ -380,14 +381,14 @@ uint8_t mcp4725_read(mcp4725_handle_t *handle, uint16_t *value)
     }
     if (handle->mode == MCP4725_MODE_DAC)                                 /* if use dac mode */
     {
-        *value = (uint16_t)buf[1] << 8 | buf[2];                          /* get value */
-        *value = *value >> 4;                                             /* right shift 4 */
+        *value = (uint16_t)(((uint16_t)buf[1]) << 8 | buf[2]);            /* get value */
+        *value = (*value) >> 4;                                           /* right shift 4 */
         
         return 0;                                                         /* success return 0 */
     }
     else if (handle->mode == MCP4725_MODE_EEPROM)                         /* if use eeprom mode */
     {
-        *value = (uint16_t)(buf[3] & 0x0F) << 8 | buf[4];                 /* get value */
+        *value = (uint16_t)((uint16_t)(buf[3] & 0x0F) << 8 | buf[4]);     /* get value */
         
         return 0;                                                         /* success return 0 */
     }
@@ -412,7 +413,7 @@ uint8_t mcp4725_read(mcp4725_handle_t *handle, uint16_t *value)
  */
 uint8_t mcp4725_write(mcp4725_handle_t *handle, uint16_t value)
 {
-    volatile uint8_t buf[6];
+    uint8_t buf[6];
     
     if (handle == NULL)                                                           /* check handle */
     {
@@ -426,27 +427,27 @@ uint8_t mcp4725_write(mcp4725_handle_t *handle, uint16_t value)
     value = value & 0xFFF;                                                        /* get valid part */
     if (handle->mode == MCP4725_MODE_DAC)                                         /* dac mode */
     {
-        buf[0] = (value >> 8) & 0xFF;                                             /* set msb */
-        buf[0] = buf[0] | (handle->power_mode << 4);                              /* set power mode */
-        buf[1] = value & 0xFF;                                                    /* set lsb */
-        buf[2] = (value >> 8) & 0xFF;                                             /* set msb */
-        buf[2] = buf[0] | (handle->power_mode << 4);                              /* set power mode */
-        buf[3] = value & 0xFF;                                                    /* set lsb */
+        buf[0] = (uint8_t)((value >> 8) & 0xFF);                                  /* set msb */
+        buf[0] = (uint8_t)(buf[0] | (handle->power_mode << 4));                   /* set power mode */
+        buf[1] = (uint8_t)(value & 0xFF);                                         /* set lsb */
+        buf[2] = (uint8_t)((value >> 8) & 0xFF);                                  /* set msb */
+        buf[2] = (uint8_t)(buf[2] | (handle->power_mode << 4));                   /* set power mode */
+        buf[3] = (uint8_t)(value & 0xFF);                                         /* set lsb */
         
         return handle->iic_write_cmd(handle->iic_addr, (uint8_t *)buf, 4);        /* write command */
     }
     else if (handle->mode == MCP4725_MODE_EEPROM)                                 /* eeprom mode */
     {
-        buf[0] = 0x03 << 5;                                                       /* set mode */
-        buf[0] = buf[0] | (handle->power_mode << 1);                              /* set power mode */
+        buf[0] = (uint8_t)(0x03 << 5);                                            /* set mode */
+        buf[0] = (uint8_t)(buf[0] | (handle->power_mode << 1));                   /* set power mode */
         value = value << 4;                                                       /* right shift 4 */
-        buf[1] = (value >> 8) & 0xFF;                                             /* set msb */
-        buf[2] = value & 0xFF;                                                    /* set lsb */
-        buf[3] = 0x03 << 5;                                                       /* set mode */
-        buf[3] = buf[0] | (handle->power_mode << 1);                              /* set power mode */
+        buf[1] = (uint8_t)((value >> 8) & 0xFF);                                  /* set msb */
+        buf[2] = (uint8_t)(value & 0xFF);                                         /* set lsb */
+        buf[3] = (uint8_t)(0x03 << 5);                                            /* set mode */
+        buf[3] = (uint8_t)(buf[3] | (handle->power_mode << 1));                   /* set power mode */
         value = value << 4;                                                       /* right shift 4 */
-        buf[4] = (value >> 8) & 0xFF;                                             /* set msb */
-        buf[5] = value & 0xFF;                                                    /* set lsb */
+        buf[4] = (uint8_t)((value >> 8) & 0xFF);                                  /* set msb */
+        buf[5] = (uint8_t)(value & 0xFF);                                         /* set lsb */
         
         return handle->iic_write_cmd(handle->iic_addr, (uint8_t *)buf, 6);        /* write command */
     }
@@ -481,7 +482,7 @@ uint8_t mcp4725_convert_to_register(mcp4725_handle_t *handle, float s, uint16_t 
         return 3;                                                                  /* return error */
     }
     
-    if (handle->ref_voltage == 0)                                                  /* check reference voltage */ 
+    if (fabsf(handle->ref_voltage - 0.0f) < 1e-6f)                                 /* check reference voltage */ 
     {
         handle->debug_print("mcp4725: reference voltage can't be zero.\n");        /* reference voltage can't be zero */
         
