@@ -35,8 +35,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_MCP4725_H_
-#define _DRIVER_MCP4725_H_
+#ifndef DRIVER_MCP4725_H
+#define DRIVER_MCP4725_H
 
 #include <stdio.h>
 #include <stdint.h>
@@ -97,7 +97,7 @@ typedef struct mcp4725_handle_s
     uint8_t (*iic_read_cmd)(uint8_t addr, uint8_t *buf, uint16_t len);         /**< point to a iic_read function address */
     uint8_t (*iic_write_cmd)(uint8_t addr, uint8_t *buf, uint16_t len);        /**< point to a iic_write function address */
     void (*delay_ms)(uint32_t ms);                                             /**< point to a delay_ms function address */
-    uint16_t (*debug_print)(char *fmt, ...);                                   /**< point to a debug_print function address */
+    void (*debug_print)(const char *const fmt, ...);                           /**< point to a debug_print function address */
     uint8_t inited;                                                            /**< inited flag */
     uint8_t mode;                                                              /**< chip mode */
     uint8_t power_mode;                                                        /**< power mode */

@@ -36,6 +36,7 @@
  */
 
 #include "driver_mcp4725_register_test.h"
+#include <math.h>
 
 static mcp4725_handle_t gs_handle;        /**< mcp4725 handle */
 
@@ -49,9 +50,8 @@ static mcp4725_handle_t gs_handle;        /**< mcp4725 handle */
  */
 uint8_t mcp4725_register_test(mcp4725_address_t addr)
 {
-    volatile uint8_t res;
-    volatile float ref_voltage;
-    volatile uint16_t reg;
+    uint8_t res;
+    float ref_voltage;
     mcp4725_mode_t mode;
     mcp4725_power_down_mode_t power_down_mode;
     mcp4725_info_t info;
@@ -68,7 +68,7 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
 
     /* get mcp4725 inforation */
     res = mcp4725_info(&info);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get info failed.\n");
        
@@ -96,7 +96,7 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     
     /* set A0_GND */
     res = mcp4725_set_addr_pin(&gs_handle, MCP4725_ADDR_A0_GND);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set addr pin failed.\n");
        
@@ -104,7 +104,7 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     }
     mcp4725_interface_debug_print("mcp4725: set addr pin A0_GND.\n");
     res = mcp4725_get_addr_pin(&gs_handle, &addr_pin);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get addr pin failed.\n");
        
@@ -114,7 +114,7 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     
     /* set A0_VCC */
     res = mcp4725_set_addr_pin(&gs_handle, MCP4725_ADDR_A0_VCC);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set addr pin failed.\n");
        
@@ -122,7 +122,7 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     }
     mcp4725_interface_debug_print("mcp4725: set addr pin A0_VCC.\n");
     res = mcp4725_get_addr_pin(&gs_handle, &addr_pin);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get addr pin failed.\n");
        
@@ -132,7 +132,7 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     
     /* set addr pin */
     res = mcp4725_set_addr_pin(&gs_handle, addr);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set addr pin failed.\n");
        
@@ -141,7 +141,7 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     
     /* mcp4725 init */
     res = mcp4725_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: init failed.\n");
        
@@ -151,42 +151,42 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     /* mcp4725_set_reference_voltage/mcp4725_get_reference_voltage */
     mcp4725_interface_debug_print("mcp4725: mcp4725_set_reference_voltage/mcp4725_get_reference_voltage test.\n");
     res = mcp4725_set_reference_voltage(&gs_handle, 3.3f);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set reference voltage failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     mcp4725_interface_debug_print("mcp4725: set reference voltage 3.3v.\n");
     res = mcp4725_get_reference_voltage(&gs_handle, (float *)&ref_voltage);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get reference voltage failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
-    mcp4725_interface_debug_print("mcp4725: check reference voltage %s.\n", 3.3f==ref_voltage?"ok":"error");
+    mcp4725_interface_debug_print("mcp4725: check reference voltage %s.\n", fabsf(3.3f - ref_voltage) < 1e-6f ? "ok " :"error");
     
     /* mcp4725_set_mode/mcp4725_get_mode test */
     mcp4725_interface_debug_print("mcp4725: mcp4725_set_mode/mcp4725_get_mode test.\n");
     
     /* set DAC mode */
     res = mcp4725_set_mode(&gs_handle, MCP4725_MODE_DAC);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     mcp4725_interface_debug_print("mcp4725: set dac mode.\n");
     res = mcp4725_get_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
@@ -194,19 +194,19 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     
     /* set EEPROM mode */
     res = mcp4725_set_mode(&gs_handle, MCP4725_MODE_EEPROM);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     mcp4725_interface_debug_print("mcp4725: set eeprom mode.\n");
     res = mcp4725_get_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
@@ -217,19 +217,19 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     
     /* set power down normal */
     res = mcp4725_set_power_mode(&gs_handle, MCP4725_POWER_DOWN_MODE_NORMAL);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     mcp4725_interface_debug_print("mcp4725: set normal power down.\n");
     res = mcp4725_get_power_mode(&gs_handle, &power_down_mode);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
@@ -237,19 +237,19 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     
     /* set power down 1K */
     res = mcp4725_set_power_mode(&gs_handle, MCP4725_POWER_DOWN_MODE_1K_GND);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     mcp4725_interface_debug_print("mcp4725: set 1K power down.\n");
     res = mcp4725_get_power_mode(&gs_handle, &power_down_mode);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
@@ -257,19 +257,19 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     
     /* set power down 100K */
     res = mcp4725_set_power_mode(&gs_handle, MCP4725_POWER_DOWN_MODE_100K_GND);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     mcp4725_interface_debug_print("mcp4725: set 100K power down.\n");
     res = mcp4725_get_power_mode(&gs_handle, &power_down_mode);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
@@ -277,19 +277,19 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
     
     /* set power down 500K */
     res = mcp4725_set_power_mode(&gs_handle, MCP4725_POWER_DOWN_MODE_500K_GND);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: set power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
     mcp4725_interface_debug_print("mcp4725: set 500K power down.\n");
     res = mcp4725_get_power_mode(&gs_handle, &power_down_mode);
-    if (res)
+    if (res != 0)
     {
         mcp4725_interface_debug_print("mcp4725: get power mode failed.\n");
-        mcp4725_deinit(&gs_handle);
+        (void)mcp4725_deinit(&gs_handle);
         
         return 1;
     }
@@ -297,7 +297,7 @@ uint8_t mcp4725_register_test(mcp4725_address_t addr)
    
     /* finish register test */
     mcp4725_interface_debug_print("mcp4725: finish register test.\n");
-    mcp4725_deinit(&gs_handle);
+    (void)mcp4725_deinit(&gs_handle);
     
     return 0;
 }
