@@ -53,7 +53,7 @@ LibDriver MCP4725是LibDriver推出的MCP4725全功能驅動，該驅動提供DA
 uint8_t res;
 
 res = mcp4725_basic_init(MCP4725_ADDR_A0_GND);
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -61,10 +61,10 @@ if (res)
 ...
 
 res = mcp4725_basic_write(1.2f);
-if (res)
+if (res != 0)
 {
     mcp4725_interface_debug_print("mcp4725: write failed.\n");
-    mcp4725_basic_deinit();
+    (void)mcp4725_basic_deinit();
 
     ...
     
@@ -73,7 +73,7 @@ if (res)
 
 ...
 
-mcp4725_basic_deinit();
+(void)mcp4725_basic_deinit();
 
 return 0;
 ```
