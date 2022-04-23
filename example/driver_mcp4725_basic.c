@@ -128,8 +128,6 @@ uint8_t mcp4725_basic_write(float voltage_v)
     res = mcp4725_convert_to_register(&gs_handle, voltage_v, (uint16_t *)&value);
     if (res != 0)
     {
-        mcp4725_interface_debug_print("mcp4725: convert to register failed.\n");
-        
         return 1;
     }
     
