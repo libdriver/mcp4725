@@ -29,15 +29,15 @@ LibDriver MCP4725 ist ein MCP4725-Treiber mit vollem Funktionsumfang, der von Li
 
 /src enthält LibDriver MCP4725-Quelldateien.
 
-/interface enthält die plattformunabhängige Vorlage LibDriver MCP4725 IIC。
+/interface enthält die plattformunabhängige Vorlage LibDriver MCP4725 IIC.
 
-/test enthält den Testcode des LibDriver MCP4725-Treibers und dieser Code kann die erforderliche Funktion des Chips einfach testen。
+/test enthält den Testcode des LibDriver MCP4725-Treibers und dieser Code kann die erforderliche Funktion des Chips einfach testen.
 
 /example enthält LibDriver MCP4725-Beispielcode.
 
 /doc enthält das LibDriver MCP4725-Offlinedokument.
 
-/Datenblatt enthält MCP4725-Datenblatt。
+/Datenblatt enthält MCP4725-Datenblatt.
 
 /project enthält den allgemeinen Beispielcode für Linux- und MCU-Entwicklungsboards. Alle Projekte verwenden das Shell-Skript, um den Treiber zu debuggen, und die detaillierten Anweisungen finden Sie in der README.md jedes Projekts.
 
