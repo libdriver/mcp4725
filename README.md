@@ -29,15 +29,15 @@ LibDriver MCP4725 is a full function MCP4725 driver launched by LibDriver.It pro
 
 /src includes LibDriver MCP4725 source files.
 
-/interface includes LibDriver MCP4725 IIC platform independent template。
+/interface includes LibDriver MCP4725 IIC platform independent template.
 
-/test includes LibDriver MCP4725 driver test code and this code can test the chip necessary function simply。
+/test includes LibDriver MCP4725 driver test code and this code can test the chip necessary function simply.
 
 /example includes LibDriver MCP4725 sample code.
 
 /doc includes LibDriver MCP4725 offline document.
 
-/datasheet includes MCP4725 datasheet。
+/datasheet includes MCP4725 datasheet.
 
 /project includes the common Linux and MCU development board sample code. All projects use the shell script to debug the driver and the detail instruction can be found in each project's README.md.
 
@@ -52,6 +52,8 @@ Add /src, /interface and /example to your project.
 #### example basic
 
 ```C
+#include "driver_mcp4725_basic.h"
+
 uint8_t res;
 
 res = mcp4725_basic_init(MCP4725_ADDR_A0_GND);

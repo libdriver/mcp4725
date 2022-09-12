@@ -52,6 +52,8 @@ LibDriver MCP4725は、LibDriverによって起動されたフル機能のMCP472
 #### example basic
 
 ```C
+#include "driver_mcp4725_basic.h"
+
 uint8_t res;
 
 res = mcp4725_basic_init(MCP4725_ADDR_A0_GND);
