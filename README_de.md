@@ -52,6 +52,8 @@ Fügen Sie /src, /interface und /example zu Ihrem Projekt hinzu.
 #### example basic
 
 ```C
+#include "driver_mcp4725_basic.h"
+
 uint8_t res;
 
 res = mcp4725_basic_init(MCP4725_ADDR_A0_GND);
