@@ -331,7 +331,7 @@ Functions</h2></td></tr>
 <p>convert the register data to the dac value </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">reg</td><td>is the register data </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*s</td><td>points to a converted dac value buffer </td></tr>
   </table>
@@ -385,7 +385,7 @@ Functions</h2></td></tr>
 <p>convert the dac value to the register data </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">s</td><td>is the converted dac value </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*reg</td><td>points to a register data buffer </td></tr>
   </table>
@@ -423,7 +423,7 @@ Functions</h2></td></tr>
 <p>close the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -469,8 +469,8 @@ Functions</h2></td></tr>
 <p>get the chip address pin </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*addr_pin</td><td>points to a address pin buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*addr_pin</td><td>points to an address pin buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -514,7 +514,7 @@ Functions</h2></td></tr>
 <p>get the chip mode </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*mode</td><td>points to a chip mode buffer </td></tr>
   </table>
   </dd>
@@ -560,7 +560,7 @@ Functions</h2></td></tr>
 <p>get the chip power mode </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*mode</td><td>points to a chip power down mode buffer </td></tr>
   </table>
   </dd>
@@ -606,7 +606,7 @@ Functions</h2></td></tr>
 <p>get the chip reference voltage </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*ref_voltage</td><td>points to a chip reference voltage buffer </td></tr>
   </table>
   </dd>
@@ -642,7 +642,7 @@ Functions</h2></td></tr>
 <p>get chip's information </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>points to a mcp4725 info structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>points to an mcp4725 info structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -676,7 +676,7 @@ Functions</h2></td></tr>
 <p>initialize the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -722,7 +722,7 @@ Functions</h2></td></tr>
 <p>read the dac value </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*value</td><td>points to a dac buffer </td></tr>
   </table>
   </dd>
@@ -769,7 +769,7 @@ Functions</h2></td></tr>
 <p>set the chip address pin </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">addr_pin</td><td>is the A0 address pin </td></tr>
   </table>
   </dd>
@@ -814,7 +814,7 @@ Functions</h2></td></tr>
 <p>set the chip mode </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>is the chip mode </td></tr>
   </table>
   </dd>
@@ -860,7 +860,7 @@ Functions</h2></td></tr>
 <p>set the chip power mode </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>is the chip power down mode </td></tr>
   </table>
   </dd>
@@ -906,7 +906,7 @@ Functions</h2></td></tr>
 <p>set the chip reference voltage </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ref_voltage</td><td>is the chip reference voltage </td></tr>
   </table>
   </dd>
@@ -952,7 +952,7 @@ Functions</h2></td></tr>
 <p>write the dac value </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a mcp4725 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an mcp4725 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>is the dac value </td></tr>
   </table>
   </dd>

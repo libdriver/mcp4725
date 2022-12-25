@@ -92,10 +92,10 @@ typedef enum
 typedef struct mcp4725_handle_s
 {
     uint8_t iic_addr;                                                          /**< iic device address */
-    uint8_t (*iic_init)(void);                                                 /**< point to a iic_init function address */
-    uint8_t (*iic_deinit)(void);                                               /**< point to a iic_deinit function address */
-    uint8_t (*iic_read_cmd)(uint8_t addr, uint8_t *buf, uint16_t len);         /**< point to a iic_read function address */
-    uint8_t (*iic_write_cmd)(uint8_t addr, uint8_t *buf, uint16_t len);        /**< point to a iic_write function address */
+    uint8_t (*iic_init)(void);                                                 /**< point to an iic_init function address */
+    uint8_t (*iic_deinit)(void);                                               /**< point to an iic_deinit function address */
+    uint8_t (*iic_read_cmd)(uint8_t addr, uint8_t *buf, uint16_t len);         /**< point to an iic_read function address */
+    uint8_t (*iic_write_cmd)(uint8_t addr, uint8_t *buf, uint16_t len);        /**< point to an iic_write function address */
     void (*delay_ms)(uint32_t ms);                                             /**< point to a delay_ms function address */
     void (*debug_print)(const char *const fmt, ...);                           /**< point to a debug_print function address */
     uint8_t inited;                                                            /**< inited flag */
@@ -133,7 +133,7 @@ typedef struct mcp4725_info_s
 
 /**
  * @brief     initialize mcp4725_handle_t structure
- * @param[in] HANDLE points to a mcp4725 handle structure
+ * @param[in] HANDLE points to an mcp4725 handle structure
  * @param[in] STRUCTURE is mcp4725_handle_t
  * @note      none
  */
@@ -141,39 +141,39 @@ typedef struct mcp4725_info_s
 
 /**
  * @brief     link iic_init function
- * @param[in] HANDLE points to a mcp4725 handle structure
- * @param[in] FUC points to a iic_init function address
+ * @param[in] HANDLE points to an mcp4725 handle structure
+ * @param[in] FUC points to an iic_init function address
  * @note      none
  */
 #define DRIVER_MCP4725_LINK_IIC_INIT(HANDLE, FUC)    (HANDLE)->iic_init = FUC
 
 /**
  * @brief     link iic_deinit function
- * @param[in] HANDLE points to a mcp4725 handle structure
- * @param[in] FUC points to a iic_deinit function address
+ * @param[in] HANDLE points to an mcp4725 handle structure
+ * @param[in] FUC points to an iic_deinit function address
  * @note      none
  */
 #define DRIVER_MCP4725_LINK_IIC_DEINIT(HANDLE, FUC)  (HANDLE)->iic_deinit = FUC
 
 /**
  * @brief     link iic_read_cmd function
- * @param[in] HANDLE points to a mcp4725 handle structure
- * @param[in] FUC points to a iic_read_cmd function address
+ * @param[in] HANDLE points to an mcp4725 handle structure
+ * @param[in] FUC points to an iic_read_cmd function address
  * @note      none
  */
 #define DRIVER_MCP4725_LINK_IIC_READ_COMMAND(HANDLE, FUC)    (HANDLE)->iic_read_cmd = FUC
 
 /**
  * @brief     link iic_write_cmd function
- * @param[in] HANDLE points to a mcp4725 handle structure
- * @param[in] FUC points to a iic_write_cmd function address
+ * @param[in] HANDLE points to an mcp4725 handle structure
+ * @param[in] FUC points to an iic_write_cmd function address
  * @note      none
  */
 #define DRIVER_MCP4725_LINK_IIC_WRITE_COMMAND(HANDLE, FUC)   (HANDLE)->iic_write_cmd = FUC
 
 /**
  * @brief     link delay_ms function
- * @param[in] HANDLE points to a mcp4725 handle structure
+ * @param[in] HANDLE points to an mcp4725 handle structure
  * @param[in] FUC points to a delay_ms function address
  * @note      none
  */
@@ -181,7 +181,7 @@ typedef struct mcp4725_info_s
 
 /**
  * @brief     link debug_print function
- * @param[in] HANDLE points to a mcp4725 handle structure
+ * @param[in] HANDLE points to an mcp4725 handle structure
  * @param[in] FUC points to a debug_print function address
  * @note      none
  */
@@ -200,7 +200,7 @@ typedef struct mcp4725_info_s
 
 /**
  * @brief      get chip's information
- * @param[out] *info points to a mcp4725 info structure
+ * @param[out] *info points to an mcp4725 info structure
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -210,7 +210,7 @@ uint8_t mcp4725_info(mcp4725_info_t *info);
 
 /**
  * @brief     set the chip address pin
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] addr_pin is the A0 address pin
  * @return    status code
  *            - 0 success
@@ -221,8 +221,8 @@ uint8_t mcp4725_set_addr_pin(mcp4725_handle_t *handle, mcp4725_address_t addr_pi
 
 /**
  * @brief      get the chip address pin
- * @param[in]  *handle points to a mcp4725 handle structure
- * @param[out] *addr_pin points to a address pin buffer
+ * @param[in]  *handle points to an mcp4725 handle structure
+ * @param[out] *addr_pin points to an address pin buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -232,7 +232,7 @@ uint8_t mcp4725_get_addr_pin(mcp4725_handle_t *handle, mcp4725_address_t *addr_p
 
 /**
  * @brief     initialize the chip
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic initialization failed
@@ -244,7 +244,7 @@ uint8_t mcp4725_init(mcp4725_handle_t *handle);
 
 /**
  * @brief     close the chip
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic deinit failed
@@ -256,7 +256,7 @@ uint8_t mcp4725_deinit(mcp4725_handle_t *handle);
 
 /**
  * @brief     write the dac value
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] value is the dac value
  * @return    status code
  *            - 0 success
@@ -269,7 +269,7 @@ uint8_t mcp4725_write(mcp4725_handle_t *handle, uint16_t value);
 
 /**
  * @brief      read the dac value
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *value points to a dac buffer
  * @return     status code
  *             - 0 success
@@ -282,7 +282,7 @@ uint8_t mcp4725_read(mcp4725_handle_t *handle, uint16_t *value);
 
 /**
  * @brief      convert the dac value to the register data
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[in]  s is the converted dac value
  * @param[out] *reg points to a register data buffer
  * @return     status code
@@ -296,7 +296,7 @@ uint8_t mcp4725_convert_to_register(mcp4725_handle_t *handle, float s, uint16_t 
 
 /**
  * @brief      convert the register data to the dac value
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[in]  reg is the register data
  * @param[out] *s points to a converted dac value buffer
  * @return     status code
@@ -310,7 +310,7 @@ uint8_t mcp4725_convert_to_data(mcp4725_handle_t *handle, uint16_t reg, float *s
 
 /**
  * @brief     set the chip mode
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] mode is the chip mode
  * @return    status code
  *            - 0 success
@@ -322,7 +322,7 @@ uint8_t mcp4725_set_mode(mcp4725_handle_t *handle, mcp4725_mode_t mode);
 
 /**
  * @brief      get the chip mode
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *mode points to a chip mode buffer
  * @return     status code
  *             - 0 success
@@ -334,7 +334,7 @@ uint8_t mcp4725_get_mode(mcp4725_handle_t *handle, mcp4725_mode_t *mode);
 
 /**
  * @brief     set the chip power mode
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] mode is the chip power down mode
  * @return    status code
  *            - 0 success
@@ -346,7 +346,7 @@ uint8_t mcp4725_set_power_mode(mcp4725_handle_t *handle, mcp4725_power_down_mode
 
 /**
  * @brief      get the chip power mode
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *mode points to a chip power down mode buffer
  * @return     status code
  *             - 0 success
@@ -358,7 +358,7 @@ uint8_t mcp4725_get_power_mode(mcp4725_handle_t *handle, mcp4725_power_down_mode
 
 /**
  * @brief     set the chip reference voltage
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] ref_voltage is the chip reference voltage
  * @return    status code
  *            - 0 success
@@ -370,7 +370,7 @@ uint8_t mcp4725_set_reference_voltage(mcp4725_handle_t *handle, float ref_voltag
 
 /**
  * @brief      get the chip reference voltage
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *ref_voltage points to a chip reference voltage buffer
  * @return     status code
  *             - 0 success
@@ -393,7 +393,7 @@ uint8_t mcp4725_get_reference_voltage(mcp4725_handle_t *handle, float *ref_volta
 
 /**
  * @brief     set the chip register
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] *buf points to a data buffer
  * @param[in] len is the data buffer length
  * @return    status code
@@ -407,7 +407,7 @@ uint8_t mcp4725_set_reg(mcp4725_handle_t *handle, uint8_t *buf, uint16_t len);
 
 /**
  * @brief      get the chip register
- * @param[in]  *handle points to a sgp30 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *buf points to a data buffer
  * @param[in]  len is the data buffer length
  * @return     status code
