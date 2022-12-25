@@ -52,7 +52,7 @@
 
 /**
  * @brief     initialize the chip
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic initialization failed
@@ -114,7 +114,7 @@ uint8_t mcp4725_init(mcp4725_handle_t *handle)
 
 /**
  * @brief     close the chip
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic deinit failed
@@ -146,7 +146,7 @@ uint8_t mcp4725_deinit(mcp4725_handle_t *handle)
 
 /**
  * @brief     set the chip address pin
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] addr_pin is the A0 address pin
  * @return    status code
  *            - 0 success
@@ -167,8 +167,8 @@ uint8_t mcp4725_set_addr_pin(mcp4725_handle_t *handle, mcp4725_address_t addr_pi
 
 /**
  * @brief      get the chip address pin
- * @param[in]  *handle points to a mcp4725 handle structure
- * @param[out] *addr_pin points to a address pin buffer
+ * @param[in]  *handle points to an mcp4725 handle structure
+ * @param[out] *addr_pin points to an address pin buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -195,7 +195,7 @@ uint8_t mcp4725_get_addr_pin(mcp4725_handle_t *handle, mcp4725_address_t *addr_p
 
 /**
  * @brief     set the chip mode
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] mode is the chip mode
  * @return    status code
  *            - 0 success
@@ -221,7 +221,7 @@ uint8_t mcp4725_set_mode(mcp4725_handle_t *handle, mcp4725_mode_t mode)
 
 /**
  * @brief      get the chip mode
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *mode points to a chip mode buffer
  * @return     status code
  *             - 0 success
@@ -247,7 +247,7 @@ uint8_t mcp4725_get_mode(mcp4725_handle_t *handle, mcp4725_mode_t *mode)
 
 /**
  * @brief     set the chip power mode
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] mode is the chip power down mode
  * @return    status code
  *            - 0 success
@@ -273,7 +273,7 @@ uint8_t mcp4725_set_power_mode(mcp4725_handle_t *handle, mcp4725_power_down_mode
 
 /**
  * @brief      get the chip power mode
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *mode points to a chip power down mode buffer
  * @return     status code
  *             - 0 success
@@ -299,7 +299,7 @@ uint8_t mcp4725_get_power_mode(mcp4725_handle_t *handle, mcp4725_power_down_mode
 
 /**
  * @brief     set the chip reference voltage
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] ref_voltage is the chip reference voltage
  * @return    status code
  *            - 0 success
@@ -325,7 +325,7 @@ uint8_t mcp4725_set_reference_voltage(mcp4725_handle_t *handle, float ref_voltag
 
 /**
  * @brief      get the chip reference voltage
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *ref_voltage points to a chip reference voltage buffer
  * @return     status code
  *             - 0 success
@@ -351,7 +351,7 @@ uint8_t mcp4725_get_reference_voltage(mcp4725_handle_t *handle, float *ref_volta
 
 /**
  * @brief      read the dac value
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *value points to a dac buffer
  * @return     status code
  *             - 0 success
@@ -402,7 +402,7 @@ uint8_t mcp4725_read(mcp4725_handle_t *handle, uint16_t *value)
 
 /**
  * @brief     write the dac value
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] value is the dac value
  * @return    status code
  *            - 0 success
@@ -461,7 +461,7 @@ uint8_t mcp4725_write(mcp4725_handle_t *handle, uint16_t value)
 
 /**
  * @brief      convert the dac value to the register data
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[in]  s is the converted dac value
  * @param[out] *reg points to a register data buffer
  * @return     status code
@@ -495,7 +495,7 @@ uint8_t mcp4725_convert_to_register(mcp4725_handle_t *handle, float s, uint16_t 
 
 /**
  * @brief      convert the register data to the dac value
- * @param[in]  *handle points to a mcp4725 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[in]  reg is the register data
  * @param[out] *s points to a converted dac value buffer
  * @return     status code
@@ -523,7 +523,7 @@ uint8_t mcp4725_convert_to_data(mcp4725_handle_t *handle, uint16_t reg, float *s
 
 /**
  * @brief     set the chip register
- * @param[in] *handle points to a mcp4725 handle structure
+ * @param[in] *handle points to an mcp4725 handle structure
  * @param[in] *buf points to a data buffer
  * @param[in] len is the data buffer length
  * @return    status code
@@ -549,7 +549,7 @@ uint8_t mcp4725_set_reg(mcp4725_handle_t *handle, uint8_t *buf, uint16_t len)
 
 /**
  * @brief      get the chip register
- * @param[in]  *handle points to a sgp30 handle structure
+ * @param[in]  *handle points to an mcp4725 handle structure
  * @param[out] *buf points to a data buffer
  * @param[in]  len is the data buffer length
  * @return     status code
@@ -575,7 +575,7 @@ uint8_t mcp4725_get_reg(mcp4725_handle_t *handle, uint8_t *buf, uint16_t len)
 
 /**
  * @brief      get chip's information
- * @param[out] *info points to a mcp4725 info structure
+ * @param[out] *info points to an mcp4725 info structure
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL

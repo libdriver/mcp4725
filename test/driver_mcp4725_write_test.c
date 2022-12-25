@@ -80,7 +80,7 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
         mcp4725_interface_debug_print("mcp4725: chip is %s.\n", info.chip_name);
         mcp4725_interface_debug_print("mcp4725: manufacturer is %s.\n", info.manufacturer_name);
         mcp4725_interface_debug_print("mcp4725: interface is %s.\n", info.interface);
-        mcp4725_interface_debug_print("mcp4725: driver version is %d.%d.\n", info.driver_version/1000, (info.driver_version%1000)/100);
+        mcp4725_interface_debug_print("mcp4725: driver version is %d.%d.\n", info.driver_version / 1000, (info.driver_version % 1000) / 100);
         mcp4725_interface_debug_print("mcp4725: min supply voltage is %0.1fV.\n", info.supply_voltage_min_v);
         mcp4725_interface_debug_print("mcp4725: max supply voltage is %0.1fV.\n", info.supply_voltage_max_v);
         mcp4725_interface_debug_print("mcp4725: max current is %0.2fmA.\n", info.max_current_ma);
