@@ -67,7 +67,7 @@ uint8_t mcp4725(uint8_t argc, char **argv)
         {"times", required_argument, NULL, 3},
         {NULL, 0, NULL, 0},
     };
-    char type[33] = "unknow";
+    char type[33] = "unknown";
     uint32_t times = 3;
     float vol = 0.0f;
     uint8_t vol_flag = 0;
@@ -338,7 +338,7 @@ int main(uint8_t argc, char **argv)
     }
     else
     {
-        mcp4725_interface_debug_print("pcf8591: unknow status code.\n");
+        mcp4725_interface_debug_print("pcf8591: unknown status code.\n");
     }
 
     return 0;
