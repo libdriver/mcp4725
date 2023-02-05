@@ -66,7 +66,7 @@ uint8_t mcp4725_write_test(mcp4725_address_t addr, uint32_t times)
     DRIVER_MCP4725_LINK_DELAY_MS(&gs_handle, mcp4725_interface_delay_ms);
     DRIVER_MCP4725_LINK_DEBUG_PRINT(&gs_handle, mcp4725_interface_debug_print);
 
-    /* get mcp4725 inforation */
+    /* get mcp4725 information */
     res = mcp4725_info(&info);
     if (res != 0)
     {

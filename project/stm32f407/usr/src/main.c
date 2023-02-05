@@ -77,7 +77,7 @@ uint8_t mcp4725(uint8_t argc, char **argv)
         {"times", required_argument, NULL, 3},
         {NULL, 0, NULL, 0},
     };
-    char type[33] = "unknow";
+    char type[33] = "unknown";
     uint32_t times = 3;
     float vol = 0.0f;
     uint8_t vol_flag = 0;
@@ -338,7 +338,7 @@ int main(void)
     /* uart init */
     uart_init(115200);
     
-    /* shell init && register mcp4725 fuction */
+    /* shell init && register mcp4725 function */
     shell_init();
     shell_register("mcp4725", mcp4725);
     uart_print("mcp4725: welcome to libdriver mcp4725.\n");
@@ -361,7 +361,7 @@ int main(void)
             }
             else if (res == 2)
             {
-                uart_print("mcp4725: unknow command.\n");
+                uart_print("mcp4725: unknown command.\n");
             }
             else if (res == 3)
             {
@@ -377,7 +377,7 @@ int main(void)
             }
             else
             {
-                uart_print("mcp4725: unknow status code.\n");
+                uart_print("mcp4725: unknown status code.\n");
             }
             uart_flush();
         }
