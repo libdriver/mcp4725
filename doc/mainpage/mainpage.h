@@ -1,6 +1,6 @@
 /**
  * @mainpage  LibDriver MCP4725
- * @brief     libdriver mcp4725 is a full function driver of mcp4725 and it can run in both MCU and Linux platform.
+ * @brief     LibDriver MCP4725 is a full function driver of MCP4725 and it can run in both MCU and Linux platform.
  * @version   2.0.0
  * @author    Shifeng Li
  *
