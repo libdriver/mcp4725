@@ -60,7 +60,7 @@ extern "C"{
 
 /**
  * @brief     basic example init
- * @param[in] addr_pin is the iic device address
+ * @param[in] addr_pin iic device address
  * @return    status code
  *            - 0 success
  *            - 1 init failed
@@ -79,7 +79,7 @@ uint8_t mcp4725_basic_deinit(void);
 
 /**
  * @brief     basic example write
- * @param[in] voltage_v is the dac value
+ * @param[in] voltage_v dac value
  * @return    status code
  *            - 0 success
  *            - 1 write failed
