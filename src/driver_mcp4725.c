@@ -413,7 +413,7 @@ uint8_t mcp4725_read(mcp4725_handle_t *handle, uint16_t *value)
  */
 uint8_t mcp4725_write(mcp4725_handle_t *handle, uint16_t value)
 {
-    uint8_t buf[6];
+    uint8_t buf[3];
     
     if (handle == NULL)                                                           /* check handle */
     {
@@ -430,26 +430,28 @@ uint8_t mcp4725_write(mcp4725_handle_t *handle, uint16_t value)
         buf[0] = (uint8_t)((value >> 8) & 0xFF);                                  /* set msb */
         buf[0] = (uint8_t)(buf[0] | (handle->power_mode << 4));                   /* set power mode */
         buf[1] = (uint8_t)(value & 0xFF);                                         /* set lsb */
-        buf[2] = (uint8_t)((value >> 8) & 0xFF);                                  /* set msb */
-        buf[2] = (uint8_t)(buf[2] | (handle->power_mode << 4));                   /* set power mode */
-        buf[3] = (uint8_t)(value & 0xFF);                                         /* set lsb */
         
-        return handle->iic_write_cmd(handle->iic_addr, (uint8_t *)buf, 4);        /* write command */
+        if (handle->iic_write_cmd(handle->iic_addr, (uint8_t *)buf, 2) != 0)      /* write command */
+        {
+            return 1;                                                             /* return error */
+        }
+        
+        return 0;                                                                 /* success return 0 */
     }
     else if (handle->mode == MCP4725_MODE_EEPROM)                                 /* eeprom mode */
     {
         buf[0] = (uint8_t)(0x03 << 5);                                            /* set mode */
         buf[0] = (uint8_t)(buf[0] | (handle->power_mode << 1));                   /* set power mode */
-        value = value << 4;                                                       /* right shift 4 */
-        buf[1] = (uint8_t)((value >> 8) & 0xFF);                                  /* set msb */
-        buf[2] = (uint8_t)(value & 0xFF);                                         /* set lsb */
-        buf[3] = (uint8_t)(0x03 << 5);                                            /* set mode */
-        buf[3] = (uint8_t)(buf[3] | (handle->power_mode << 1));                   /* set power mode */
-        value = value << 4;                                                       /* right shift 4 */
-        buf[4] = (uint8_t)((value >> 8) & 0xFF);                                  /* set msb */
-        buf[5] = (uint8_t)(value & 0xFF);                                         /* set lsb */
+        buf[1] = (uint8_t)((value >> 4) & 0xFF);                                  /* set msb */
+        buf[2] = (uint8_t)((value & 0x0F) << 4);                                  /* set lsb */
         
-        return handle->iic_write_cmd(handle->iic_addr, (uint8_t *)buf, 6);        /* write command */
+        if (handle->iic_write_cmd(handle->iic_addr, (uint8_t *)buf, 3) != 0)      /* write command */
+        {
+            return 1;                                                             /* return error */
+        }
+        handle->delay_ms(51);                                                     /* delay 51 ms */
+        
+        return 0;                                                                 /* success return 0 */
     }
     else
     {
